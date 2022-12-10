@@ -2,9 +2,12 @@ package com.jean.dsCommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "tb_category")
 public class Category {
 
     @Id
@@ -14,6 +17,9 @@ public class Category {
     private String description;
     private Double price;
     private String imgUri;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -64,6 +70,10 @@ public class Category {
 
     public void setImgUri(String imgUri) {
         this.imgUri = imgUri;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     @Override
