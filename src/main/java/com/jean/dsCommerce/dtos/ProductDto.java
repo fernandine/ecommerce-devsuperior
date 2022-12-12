@@ -1,5 +1,7 @@
 package com.jean.dsCommerce.dtos;
 
+import com.jean.dsCommerce.entities.Product;
+
 public class ProductDto {
 
     private Long id;
@@ -17,6 +19,14 @@ public class ProductDto {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+    public ProductDto(Product entity) {
+        id = entity.getId();
+        name = entity.getName();
+        description = entity.getDescription();
+        price = entity.getPrice();
+        imgUrl = entity.getImgUrl();
     }
 
     public Long getId() {
