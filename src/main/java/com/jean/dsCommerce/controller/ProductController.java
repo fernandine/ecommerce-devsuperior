@@ -5,6 +5,7 @@ import com.jean.dsCommerce.dtos.ProductDto;
 import com.jean.dsCommerce.services.ProductService;
 import com.jean.dsCommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -38,7 +39,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> insert(@RequestBody ProductDto dto) {
+    public ResponseEntity<ProductDto> insert(@Valid @RequestBody ProductDto dto) {
         dto = productService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -46,13 +47,9 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto dto) {
-        try {
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @Valid @RequestBody ProductDto dto) {
             dto = productService.update(id, dto);
             return ResponseEntity.ok().body(dto);
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Resource not found");
-        }
     }
 
     @DeleteMapping("/{id}")

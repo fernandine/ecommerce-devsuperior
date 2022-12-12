@@ -1,12 +1,18 @@
 package com.jean.dsCommerce.dtos;
 
 import com.jean.dsCommerce.entities.Product;
+import jakarta.validation.constraints.*;
 
 public class ProductDto {
 
     private Long id;
+    @Size(min = 3, max = 50)
+    @NotBlank(message = "Campo requerido")
     private String name;
+    @Size(min = 3, max = 100)
+    @NotBlank(message = "Campo requerido")
     private String description;
+    @Positive(message = "O preço deve ser positivo")
     private Double price;
     private String imgUrl;
 
