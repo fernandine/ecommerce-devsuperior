@@ -1,6 +1,10 @@
 package com.jean.dsCommerce.dtos;
 
+import com.jean.dsCommerce.entities.User;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDto {
 
@@ -11,6 +15,8 @@ public class UserDto {
     private LocalDate birthDate;
     private String password;
     private String[] roles;
+
+    private List<OrderDto> orders = new ArrayList<>();
 
     public UserDto() {
     }
@@ -23,6 +29,17 @@ public class UserDto {
         this.birthDate = birthDate;
         this.password = password;
         this.roles = roles;
+    }
+
+    public UserDto(User entity) {
+        id = entity.getId();
+        name = entity.getName();
+        email = entity.getEmail();
+        phone = entity.getPhone();
+        birthDate = entity.getBirthDate();
+        password = entity.getPassword();
+        roles = entity.getRoles();
+        entity.getOrders().forEach(p -> this.orders.add(new OrderDto(p)));
     }
 
     public Long getId() {
@@ -79,5 +96,13 @@ public class UserDto {
 
     public void setRoles(String[] roles) {
         this.roles = roles;
+    }
+
+    public List<OrderDto> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderDto> orders) {
+        this.orders = orders;
     }
 }

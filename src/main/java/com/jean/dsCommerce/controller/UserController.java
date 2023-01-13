@@ -11,13 +11,4 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-
-    @GetMapping("id")
-
-    @PostMapping
-
-    @PutMapping
-
-    @DeleteMapping
 }

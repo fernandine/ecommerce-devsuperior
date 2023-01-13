@@ -11,13 +11,4 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @GetMapping
-
-    @GetMapping("id")
-
-    @PostMapping
-
-    @PutMapping
-
-    @DeleteMapping
 }
